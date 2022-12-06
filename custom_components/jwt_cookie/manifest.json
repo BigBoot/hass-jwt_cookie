@@ -1,0 +1,18 @@
+{
+    "domain": "jwt_cookie",
+    "name": "jwt_cookie",
+    "documentation": "",
+    "ssdp": [],
+    "zeroconf": [],
+    "homekit": {},
+    "dependencies": [
+        "auth"
+    ],
+    "requirements": [
+        "python-jose==3.3.0"
+    ],
+    "codeowners": [
+        "BigBoot"
+    ],
+    "version": "0.1"
+}
