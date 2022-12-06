@@ -105,7 +105,7 @@ If you want to contribute to this please read the [Contribution guidelines](CONT
 
 ***
 
-[integration_blueprint]: https://github.com/custom-components/integration_blueprint
+[integration_blueprint]: https://github.com/bigboot/hass-jwt_cookie
 [hacs]: https://github.com/custom-components/hacs
 [hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
 [jwtimg]: jwt.png
