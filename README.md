@@ -110,5 +110,5 @@ If you want to contribute to this please read the [Contribution guidelines](CONT
 [jwtimg]: jwt.png
 [license-shield]: https://img.shields.io/github/license/bigboot/hass-jwt_cookie.svg?style=for-the-badge
 [maintenance-shield]: https://img.shields.io/badge/maintainer-%40BigBoot-blue.svg?style=for-the-badge
-[releases-shield]: https://img.shields.io/github/release/custom-components/blueprint.svg?style=for-the-badge
-[releases]: https://github.com/custom-components/integration_blueprint/releases
+[releases-shield]: https://img.shields.io/github/release/bigboot/hass-jwt_cookie.svg?style=for-the-badge
+[releases]: https://github.com/bigboot/hass-jwt_cookie/releases
