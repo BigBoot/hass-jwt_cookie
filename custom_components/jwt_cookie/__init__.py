@@ -51,6 +51,24 @@ CONFIG_SCHEMA = vol.Schema(
 )
 
 
+def remove_route(hass: HomeAssistant, url):
+    for route in hass.http.app.router._resources:
+        if route.canonical == url:
+            _LOGGER.debug(f"Removed original {url} route (UrlDispatcher)")
+            hass.http.app.router._resources.remove(route)
+
+    # HASS 2023.8+
+    if hasattr(hass.http.app.router, "_resource_index"):
+        canonical = url if "{" not in url else url.split("{")[0].rstrip("/")
+        routes = hass.http.app.router._resource_index.get(canonical, [])
+        for route in routes:
+            if route.canonical == url:
+                _LOGGER.debug(
+                    f"Removed original {url} [{canonical}] route (FastUrlDispatcher)"
+                )
+                routes.remove(route)
+
+
 async def async_setup(hass: HomeAssistant, config):
     """Load configuration and register custom views"""
     domain_config = config[DOMAIN]
@@ -62,13 +80,8 @@ async def async_setup(hass: HomeAssistant, config):
     )._retrieve_auth
 
     # Remove old Views
-    for route in hass.http.app.router._resources:
-        if route.canonical == "/auth/login_flow/{flow_id}":
-            _LOGGER.debug("Removed original login_flow route")
-            hass.http.app.router._resources.remove(route)
-        elif route.canonical == "/auth/token":
-            _LOGGER.debug("Removed original token route")
-            hass.http.app.router._resources.remove(route)
+    remove_route(hass, LoginFlowResourceView.url)
+    remove_route(hass, TokenView.url)
 
     private_key_path = domain_config.get("private_key_file", None)
     if private_key_path and path.isfile(private_key_path):
