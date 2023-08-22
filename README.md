@@ -14,18 +14,18 @@ Create JWT Cookies every time you log in to your HomeAssistant instance.
 I wanted to reverse proxy a few of my internally reachable services and make them available through my publicly accessible HomeAssistant installation.
 After looking at the available solutions I was not satisfied with any of them, here's some of the solutions I evaluated and why I disliked them.
 
-- BasicAuth using user:password in the url
-   ❌ Doesn't work in the Android/iOS App
+- BasicAuth using user:password in the url  
+   ❌ Doesn't work in the Android/iOS App  
    ❌ Makes the login details available in cleartext in the url
 
-- Authelia
-   ❌ User Management Separate from HomeAssistant
-   ❌ No SSO
+- Authelia  
+   ❌ User Management Separate from HomeAssistant  
+   ❌ No SSO  
    ❌ Doesn't work in the Android/iOS App?
 
-- LDAP+Authelia+HomeAssistant LDAP+Some LDAP GUI
-   ❌ Very Complex
-   ❌ No True SSO (You'll have to log in to Home Assistant **AND** Authelia separately)
+- LDAP+Authelia+HomeAssistant LDAP+Some LDAP GUI  
+   ❌ Very Complex  
+   ❌ No True SSO (You'll have to log in to Home Assistant **AND** Authelia separately)  
    ❌ Doesn't work in the Android/iOS App?
 
 - Various other similar combination of solutions like Authentik/Keycloak/... all suffer from the same fundamental problems as Authelia
