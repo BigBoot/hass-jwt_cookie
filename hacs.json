@@ -1,5 +1,5 @@
 {
     "name": "jwt_cookie",
-    "hacs": "0.0.2",
+    "hacs": "0.0.3",
     "render_readme": true
 }

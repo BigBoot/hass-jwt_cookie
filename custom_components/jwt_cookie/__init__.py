@@ -1,6 +1,7 @@
 import gc
 import jwt
 import logging
+from inspect import isawaitable
 from http import HTTPStatus
 from os import path
 from typing import Union
@@ -248,9 +249,13 @@ class JWTCookieTokenView(TokenView):
         response = await super()._async_handle_refresh_token(hass, data, remote_addr)
 
         if response.status == 200:
-            token = await hass.auth.async_get_refresh_token_by_token(
+            token = hass.auth.async_get_refresh_token_by_token(
                 data.get("refresh_token")
             )
+
+            if isawaitable(token):
+                token = await token
+
             create_jwt_cookie(response, token.user, self.config)
 
         return response
