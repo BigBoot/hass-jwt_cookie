@@ -69,8 +69,7 @@ def remove_route(hass: HomeAssistant, url):
                 )
                 routes.remove(route)
 
-
-async def async_setup(hass: HomeAssistant, config):
+def setup(hass: HomeAssistant, config):
     """Load configuration and register custom views"""
     domain_config = config[DOMAIN]
 
@@ -126,7 +125,6 @@ async def async_setup(hass: HomeAssistant, config):
     hass.http.register_view(JWTCookieRedirectView)
 
     return True
-
 
 def create_jwt_cookie(response: web.Response, user: User, config):
     """Create a new JWT Cookie and append it to the response"""
