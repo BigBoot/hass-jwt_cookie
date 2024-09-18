@@ -26,25 +26,22 @@ Note that none of those are hard requirements but for the sake of simplicity thi
 - Add the Caddy2 addon repository:
  [![Add Caddy2 addon repository](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Feinschmidt%2Fhassio-addons)
 - Install the Caddy2 addon: [![Install the Caddy2 addon](https://my.home-assistant.io/badges/supervisor_store.svg)](https://my.home-assistant.io/redirect/supervisor_store/)
-- Enable AutoStart & Watchdog  for the Caddy2 addon
-- Configure the Caddy2 addon:
-  set `config_path` to `/config/Caddyfile`
-  set `custom_binary_path` to `/config/caddy`
-- [Download Caddy with the caddy-security plugin](https://caddyserver.com/download?package=github.com%2Fgreenpau%2Fcaddy-security) and save it as `/config/caddy`
+- Enable AutoStart & Watchdog for the Caddy2 addon
+- [Download Caddy with the caddy-security plugin](https://caddyserver.com/download?package=github.com%2Fgreenpau%2Fcaddy-security) and save it as `/addon_configs/c80c7555_caddy-2/caddy`
 
 
 ## 3. Configure Caddy, and HomeAssistant
-- Create the file `/config/Caddyfile` with the following content:
+- Create the file `/addon_configs/c80c7555_caddy-2/Caddyfile` with the following content:
 ```Caddyfile
 {
 	security {
-        # Set up a policy called homeassistant
-		authorization policy homeassistant {
-			set token sources cookie
-			crypto key verify from file /config/jwt_cookie.pem
-			set auth url https://my.home.assistant/auth/jwt_cookie
-			crypto key token name jwt_access_token
-			allow roles user
+                # Set up a policy called homeassistant
+                authorization policy homeassistant {
+                        set token sources cookie
+                        crypto key verify from file /share/jwt_cookie.pem
+                        set auth url https://my.home.assistant/auth/jwt_cookie
+                        crypto key token name jwt_access_token
+                        allow roles user
 		}
 	}
 }
@@ -75,6 +72,7 @@ http:
 jwt_cookie:
   domain: ".my.home.assistant"
   private_key_file: /config/jwt_cookie.key
+  public_key_file: /share/jwt_cookie.pem
 ```
 
 ## 4. Restart HomeAssistant
